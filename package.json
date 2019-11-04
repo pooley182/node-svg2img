@@ -1,13 +1,13 @@
 {
   "name": "promise-svg2img",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "In memory SVG to jpeg/png converter that returns Promises",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/pooley182/node-svg2img"
   },
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register test/specs.ts"
   },
@@ -39,5 +39,11 @@
     "canvas": "^2.6.0",
     "canvg": "^1.5.3"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "readmeFilename": "README.md"
 }
