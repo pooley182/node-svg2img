@@ -1,26 +1,42 @@
 {
-  "name": "svg2img",
-  "version": "0.6.1",
-  "description": "A high-performance in-memory convertor to convert svg to png/jpeg images for Node. ",
+  "name": "promise-svg2img",
+  "version": "0.1.0",
+  "description": "In memory SVG to jpeg/png converter that returns Promises",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fuzhenn/node-svg2img"
+    "url": "https://github.com/pooley182/node-svg2img"
   },
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "mocha test/specs.js"
+    "test": "mocha -r ts-node/register test/specs.ts"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/btoa": "^1.2.3",
+    "@types/expect.js": "^0.3.29",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
     "expect.js": "^0.3.1",
-    "mocha": "^2.5.3",
+    "mocha": "^6.2.2",
     "node-base64-image": "^1.0.3",
-    "should": "^8.2.2"
+    "should": "^8.2.2",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
   },
   "dependencies": {
+    "@types/atob": "^2.1.2",
     "atob": "^2.0.0",
     "btoa": "^1.1.2",
-    "canvas": "^2.0.0-alpha.13",
+    "canvas": "^2.6.0",
     "canvg": "^1.5.3"
   },
   "readmeFilename": "README.md"

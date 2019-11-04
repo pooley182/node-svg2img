@@ -1,5 +1,5 @@
 test/
 .vscode/
 circle.yml
-test.js
+test.ts
 *.png

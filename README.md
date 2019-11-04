@@ -1,11 +1,7 @@
-# node-svg2img
+# promise-svg2img
 
-[![CircleCI](https://circleci.com/gh/fuzhenn/node-svg2img.svg?style=svg)](https://circleci.com/gh/fuzhenn/node-svg2img)
-
-A high-performance in-memory convertor to convert svg to png/jpeg images for Node.
-Based on [canvg](https://github.com/gabelerner/canvg) and [node-canvas](https://github.com/Automattic/node-canvas)
-
-Because of [jsdom](https://github.com/tmpvar/jsdom), it requires Node.js 4 or newer.
+An in-memory convertor to convert svg to png/jpeg images that returns promises.
+Based on [node-svg2img](https://github.com/fuzhenn/node-svg2img)
 
 Please notice: this library is only for Node, can not run in browsers.
 
@@ -21,11 +17,10 @@ npm install svg2img
 To output JPEG image, you should install `node-canvas` with jpeg support.
 
 ```javascript
-var fs = require('fs');
-var svg2img = require('svg2img');
-var btoa = require('btoa');
+import fs from 'fs';
+import svg2img from 'promise-svg2img';
 
-var svgString = [
+const svgString = [
 '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="236" height="120" ',
 'viewBox="0 0 236 120">',
 '<rect x="14" y="23" width="200" height="50" fill="#55FF55" stroke="black" stroke-width="1" />',
@@ -33,44 +28,36 @@ var svgString = [
 ].join('');
 
 //1. convert from svg string
-svg2img(svgString, function(error, buffer) {
+svg2img(svgString).then((buffer) => {
     //returns a Buffer
     fs.writeFileSync('foo1.png', buffer);
+}).catch((error) => {
+	
 });
 
-//2. convert from svg's base64 string
-svg2img(
-    'data:image/svg+xml;base64,'+ btoa(svgString),
-    function(error, buffer) {
-        fs.writeFileSync('foo2.png', buffer);
+//2. convert from a local file
+svg2img(__dirname+'/foo.svg').then((buffer) => {
+    fs.writeFileSync('foo2.png', buffer);
+}).catch((error) => {
+    
 });
 
-fs.writeFileSync('foo.svg', new Buffer(svgString));
-
-//3. convert from a local file
-svg2img(__dirname+'/foo.svg', function(error, buffer) {
-    fs.writeFileSync('foo3.png', buffer);
-});
-
-//4. convert from a remote file
-svg2img(
-    'https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg',
-    function(error, buffer) {
-        fs.writeFileSync('foo4.png', buffer);
-});
-
-//5. convert to jpeg file
-svg2img(svgString, {format:'jpg','quality':75}, function(error, buffer) {
+//3. convert to jpeg file
+svg2img(svgString, {format:'jpg','quality':75}).then((buffer) => {
     //default jpeg quality is 75
     fs.writeFileSync('foo5.jpg', buffer);
+}).catch((error) => {
+    
 });
 ```
 
 ### Scale
 You can scale the svg by giving width and height.
 ```javascript
-svg2img(__dirname+'/foo.svg', {'width':800, 'height':600} ,function(error, buffer) {
+svg2img(__dirname+'/foo.svg', {'width':800, 'height':600}).then((buffer) => {
     fs.writeFileSync('foo.png', buffer);
+}).catch((error) => {
+    
 });
 ```
 
@@ -79,20 +66,22 @@ By default, the aspect ratio isn't preserved when scaling (same as `preserveAspe
 // use original preserveAspectRatio
 svg2img(
     __dirname+'/foo.svg',
-    {width:800, height:600, preserveAspectRatio:true},
-    function(error, buffer) {
+    {width:800, height:600, preserveAspectRatio:true})
+    .then((buffer) => {
         fs.writeFileSync('foo.png', buffer);
-    }
-);
+    }).catch((error) => {
+    	
+});
 
 // use custom preserveAspectRatio
 svg2img(
     __dirname+'/foo.svg',
-    {width:800, height:600, preserveAspectRatio:'xMinYMid meet'},
-    function(error, buffer) {
+    {width:800, height:600, preserveAspectRatio:'xMinYMid meet'})
+    .then((buffer) => {
         fs.writeFileSync('foo.png', buffer);
-    }
-);
+    }).catch((error) => {
+    	
+});
 ```
 
 ## Run the Test
