@@ -8,7 +8,7 @@ Please notice: this library is only for Node, can not run in browsers.
 ## Install
 
 ```bash
-npm install svg2img
+npm install promise-svg2img
 ```
 
 ## Usage
