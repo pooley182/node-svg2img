@@ -1,6 +1,6 @@
 {
   "name": "promise-svg2img",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "In memory SVG to jpeg/png converter that returns Promises",
   "license": "MIT",
   "repository": {
@@ -8,8 +8,12 @@
     "url": "https://github.com/pooley182/node-svg2img"
   },
   "main": "dist/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register test/specs.ts"
+    "test": "mocha -r ts-node/register test/specs.ts",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --ignore \"tests\",\"src/**/*.spec.js\",\"src/**/*.test.js\" --source-maps inline"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
